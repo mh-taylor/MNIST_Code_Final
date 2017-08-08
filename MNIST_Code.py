@@ -42,10 +42,8 @@ with tf.Session() as sess:
         total_cost = 0
         for _ in range(int(mnist.train.num_examples / batch_size)):
             batch_x, batch_y = mnist.train.next_batch(batch_size)
-            t, c = sess.run([ts, cf], feed_dict={network_input: batch_x, target_output: batch_y})
-            # t, c = sess.run([optimizer, cross_entropy], feed_dict={network_input: batch_x, target_output: batch_y})
+            t, c = sess.run([ts, cf], feed_dict={network_input: batch_x, target_output: batch_y})       
             total_cost += c
         print('Epoch', epoch, 'completed out of', num_epochs, 'loss:', total_cost)
-        #print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
     print('Accuracy:', acc.eval({network_input: mnist.test.images,target_output: mnist.test.labels}))
 
